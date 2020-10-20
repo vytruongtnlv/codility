@@ -4,30 +4,25 @@
 public class TapeEquilibrium {
     public static int solution(int[] A) {
         if(A.length == 2) {
-            return getGap(A[0], A[1]);
+            return Math.abs(A[0] - A[1]);
         }
 
-        int i = 0;
-        int j = A.length-1;
-
-        int leftSum = A[i];
-        int rightSum = A[j];
-
-        i++;
-        j--;
-
-        int minGap = getGap(leftSum, rightSum);
-        while(i <= j){
-            if(rightSum >= leftSum){
-                leftSum += A[i];
-                i++;
-            }
-            else {
-                rightSum += A[j];
-                j--;
-            }
-            minGap = getGap(leftSum, rightSum);
+        int minGap = Integer.MAX_VALUE;
+        int total = 0;
+        for(int i = 0; i < A.length; i++) {
+            total += A[i];
         }
+
+        int leftSum = 0;
+        int rightSum = 0;
+        for(int i = 0; i < A.length - 1; i++){
+            leftSum += A[i];
+            rightSum = total - leftSum;
+            if(Math.abs(leftSum - rightSum) < minGap) {
+                minGap = Math.abs(leftSum - rightSum);
+            }
+        }
+
         return minGap;
     }
 
