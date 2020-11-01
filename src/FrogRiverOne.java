@@ -7,7 +7,17 @@ public class FrogRiverOne {
     public static int solution(int X, int[] A) {
         // write your code in Java SE 8
         HashMap<Integer, Integer> intHs = parseToMap(A);
-        return intHs.get(X) != null ? intHs.get(X) : -1;
+        int maxPos = Integer.MIN_VALUE;
+        if(intHs.size() < X) return -1;
+        for(int i = 1; i <= X; i++){
+            if(intHs.get(i) == null) {
+                return -1;
+            }
+            else if(maxPos < intHs.get(i)) {
+                maxPos = intHs.get(i);
+            }
+        }
+        return maxPos;
     }
 
     public static HashMap<Integer, Integer> parseToMap (int A[]) {
@@ -24,7 +34,7 @@ public class FrogRiverOne {
 
         int x = 5;
 
-//        System.out.printf(""+solution(x,A));
+        System.out.printf(""+solution(x,A));
         System.out.printf(""+solution(5, new int[]{3}));
     }
 }
